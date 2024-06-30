@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form | Dan Aleko</title>
+    <link rel="stylesheet" href="admin2.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body{
+            background:linear-gradient(to left,rgb(243, 243, 109),rgb(250, 183, 59));
+        }
+        .wrapper{
+            margin-top: 120px;;
+            margin-left:400px;
+            width:500px;
+            height:300px;
+            padding:10px;
+            background-color: rgb(161, 208, 239);
+            display: flex;
+            justify-content: center;
+            border-top-left-radius:30% ;
+            border-bottom-right-radius:30% ;
+        }
+        h1{
+            position: relative;
+           
+
+        }
+        .input-box{
+           margin-bottom: 10px;
+           height:30px;
+           
+        }
+        #btn{
+            margin-left: 30px;
+            background-color: rgb(156, 119, 156);
+        }
+        #btn:hover{
+            background-color: rgb(241, 161, 241);
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <form action="#" method="post">
+        <h1>Register</h1>
+        <div class="input-box">
+            <input type="text" placeholder="New Username" required>
+            <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+            <input type="password" id="newPassword" placeholder="New Password" required> <!-- Added id="newPassword" -->
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+        <div class="input-box">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required> <!-- Added id="confirmPassword" -->
+            <i class='bx bxs-lock-alt'></i>
+            <span id="passwordError" style="color: red;"></span>
+        </div>
+        
+        <button type="button" class="btn" onclick="validatePasswords()" id="btn">Sign Up</button>
+        <span id="confirmationMessage" style="color: green;"></span>
+      </form>
+</div>
+
+<script>
+    function validatePasswords() {
+        var newPassword = document.getElementById("newPassword").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        //var passwordError = document.getElementById("passwordError");
+        //var confirmationMessage = document.getElementById("confirmationMessage"); 
+        if (newPassword !== confirmPassword) {
+          alert("Confirm Password and New Password do not match!");
+        } else {
+          alert("Passwords matched! Redirecting to sign-in page...");
+        setTimeout(() => { // Delay the redirect for 2 seconds
+            window.location.href = "admin1.html";
+        }, 1000);
+            
+        }
+    }
+</script>
+
+</body>
+</html>

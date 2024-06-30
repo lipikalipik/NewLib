@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get User Data</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional Custom Styles */
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: #f8f9fa; /* Set background color */
+        }
+        .form-container {
+            padding: 20px;
+            border: 1px solid #ced4da; /* Add border */
+            border-radius: 10px; /* Add border radius */
+            background-color: #faf3f6; /* Set background color */
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Add box shadow */
+            border-color: black;
+            border-width: 7px;
+            border-style:outset;
+        }
+        .form-group {
+            margin-bottom: 10px; /* Reduce margin between form groups */
+        }
+    </style>
+</head>
+<body style="background-color:#520d54">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="form-container">
+                    <h2 class="mb-4">Get User Data</h2>
+                    <form action="borrowedbooks.jsp" method="post">
+                        <div class="form-group">
+                            <label for="id" class="form-label">Enter USN:</label>
+                            <input type="text" id="id" name="id" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Fetch Data</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

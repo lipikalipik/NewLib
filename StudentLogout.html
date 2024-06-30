@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome, John Doe!</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Search Books</a></li>
+                    <li><a href="#">View Borrowed Books</a></li>
+                    <li><a href="#">Return Books</a></li>
+                    <li><a href="#">Renew Books</a></li>
+                    <li><a href="#" id="logout">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+        <!-- Other sections of the home page -->
+    </div>
+
+    <!-- JavaScript for logout functionality -->
+    <script>
+        // Add an event listener to the logout link
+        document.getElementById('logout').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            logout(); // Call the logout function
+        });
+
+        // Function to perform logout
+        function logout() {
+            // You can perform any additional logout tasks here, such as clearing session storage, etc.
+            alert('You have been logged out.'); // Display a logout message (optional)
+            window.location.href = 'studentlogin.html'; // Redirect the user to the login page
+        }
+    </script>
+</body>
+</html>

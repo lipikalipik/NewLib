@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form | Dan Aleko</title>
+  <link rel="stylesheet" href="student1.css"><!--changed-->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url("https://static.foxnews.com/foxnews.com/content/uploads/2020/01/iStock-1141156365.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .wrapper{
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(9px);
+    color: #fff;
+    border-radius: 12px;
+    padding: 30px 40px;
+  }
+  .wrapper h1{
+    font-size: 36px;
+    text-align: center;
+  }
+  .wrapper .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    
+    margin: 30px 0;
+  }
+  .input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+  }
+  .input-box input::placeholder{
+    color: #fff;
+  }
+  .input-box i{
+    position: absolute;
+    right: 20px;
+    top: 30%;
+    transform: translate(-50%);
+    font-size: 20px;
+   
+  }
+  .wrapper .remember-forgot{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+     padding:8px;
+  }
+  .remember-forgot label input{
+    accent-color: #fff;
+    margin-right: 3px;
+  
+  }
+  .remember-forgot a{
+    color: #fff;
+    text-decoration: none;
+  
+  }
+  .remember-forgot a:hover{
+    text-decoration: underline;
+  }
+  .wrapper .btn{
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+  }
+  .wrapper .register-link{
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+  
+  }
+  .register-link p a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .register-link p a:hover{
+    text-decoration: underline;
+  }
+  .and{
+  margin-left:110px;
+  padding:10px;
+  color:maroon;
+  } 
+  #errorMsg {
+    display: block; /* Ensure the span is displayed as a block element */
+    margin-bottom: 10px; /* Add margin to create space between the error message and the input box */
+}
+
+</style>
+  
+<body>
+<div class ="wrapper">
+<form id=loginForm action="awe" method="post" >
+  <h1>Login</h1>
+  <div class="input-box">
+    <input type="text" placeholder="Username" name="username" id="username"required><!-- Add name attribute -->
+    <i class='bx bxs-user'></i>
+  </div>
+  <div class="input-box">
+    <input type="text" placeholder="Admin Id" name="adminid"id="adminid" required>
+    <i class='bx bxs-user'></i>
+</div>
+  <div class="input-box" >
+    <input type="password" placeholder="Password" name="password" id="password" required ><!-- Add id attribute -->
+    <span id="errorMsg" style="color:red;"></span><br> <!-- Error message span -->
+    <i class='bx bxs-lock-alt' ></i>
+</div>
+  <div class="remember-forgot">
+    <label><input type="checkbox" name="remember">Remember Me</label><!-- Add name attribute -->
+    <a href="forget.html">Forgot Password</a>
+  </div>
+  <button type="submit" class="btn" onclick="validatePasswords()" id="loginButton" href="welcome.html">Login</button>
+        <span id="confirmationMessage" style="color: green;"></span>
+  <div class="and">
+    <a href="NewStudentRegister.html">New User ?</a>
+  </div>
+</form>
+</div>
+<script>
+    function validatePasswords() {
+        var newPassword = document.getElementById("newPassword").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        //var passwordError = document.getElementById("passwordError");
+        //var confirmationMessage = document.getElementById("confirmationMessage"); 
+        if (newPassword !== confirmPassword) {
+          alert("Confirm Password and New Password do not match!");
+        } else {
+          alert("Passwords matched! Redirecting to sign-in page...");
+        setTimeout(() => { // Delay the redirect for 2 seconds
+            window.location.href = "admin1.html";
+        }, 1000);        
+        }
+    }
+</script>
+</body>
+</html>

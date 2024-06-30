@@ -1,0 +1,201 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%
+    // Handle delete request
+    String deleteBookId = request.getParameter("deleteBookId");
+    if (deleteBookId != null) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/adminlogin", "root", "your_password");
+
+            String query = "DELETE FROM booksdetail WHERE BookID = ?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, Integer.parseInt(deleteBookId));
+            int rowsAffected = pstmt.executeUpdate();
+
+            pstmt.close();
+            con.close();
+        } catch (Exception e) {
+            out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color:#fff0f1;
+            
+        }
+        .container {
+            margin-top: 30px;
+            outline-color: black;
+    
+        }
+        .table {
+            background-color: #cbc1d2; /* Light background color for the table */
+        }
+        td {
+            padding: 10px; /* Add padding to create margin-like space */
+            background-color:#dab0d3;
+        
+        }
+        th{
+            background-color: rgb(201, 184, 220);
+            color: #ac63ab;
+            padding: 10px;
+        }
+        .table-bordered {
+            border: 1px solid #dee2e6;
+            border-spacing: 10px; /* Adjust this value to control spacing */
+        }
+        .btn-link {
+            color: #1520b9; /* Bootstrap link button color */
+        }
+        #sbtn{
+            background-color: #add6ff;
+color: black;
+border: none;
+        }
+        #sbtn:hover{
+            background-color: #3d2352;
+            color:white;
+            border: none;
+        }
+        #logo{
+           position:relative;
+           left:1450px;
+           bottom:50px;
+           
+           
+            width:60px;
+            height: 60px;
+            background-color: #eedae8;
+            border-radius: 50%;
+        }
+        
+       
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" id="searchInput" placeholder="Search" aria-label="Search">
+                <button id="sbtn" class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="searchTable()">Search</button>
+            </form>
+        </ul>
+    </div>
+</nav>
+<img src="LibraryLogo.png" id="logo">
+<div class="container">
+    <div class="card">
+        <table class="table table-bordered align-middle mb-0 bg-white" id="booksTable">
+            <thead class="bg-light">
+            <tr>
+                <th>Book ID</th>
+                <th>Book Name</th>
+                <th>Edition</th>
+                <th>Author</th>
+                <th>Action</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% 
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/adminlogin", "root", "#Dhuvihegde26");
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery("SELECT * FROM booksdetail");
+
+                    while(rs.next()) { 
+            %>
+            <tr>
+                <td><%= rs.getInt("BookID") %></td>
+                <td><%= rs.getString("BookName") %></td>
+                <td><%= rs.getInt("Edition") %></td>
+                <td><%= rs.getString("Author") %></td>
+                <td>
+                    <form action="" method="post" onsubmit="return confirmDeletion()">
+                        <input type="hidden" name="deleteBookId" value="<%= rs.getInt("BookID") %>">
+                        <button type="submit" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form action="toaddbookadmin.html" method="get">
+                        <button type="submit" class="btn btn-link btn-sm btn-rounded">
+                            Add
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <% 
+                    }
+                    rs.close();
+                    st.close();
+                    con.close();
+                } catch (Exception e) {
+                    out.println("Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function searchTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("booksTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1]; // Index 1 corresponds to the Book Name column
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+
+        // Clear search input and display all rows if input is empty
+        if (filter === "") {
+            for (i = 0; i < tr.length; i++) {
+                tr[i].style.display = "";
+            }
+        }
+    }
+
+    // Update search results while typing
+    document.getElementById("searchInput").addEventListener("input", searchTable);
+
+    // Function to confirm deletion
+    function confirmDeletion() {
+        return confirm("Are you sure you want to delete this book?");
+    }
+</script>
+</body>
+</html>
